@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login to Charge</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="icon" type="image/png" href="img/URL_ico.png"/>
+<!--===============================================================================================-->
+<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-t-85 p-b-20">
+				<form class="login100-form validate-form">
+					<span class="login100-form-title p-b-70">
+						Welcome
+					</span>
+					<span class="login100-form-avatar">
+						<img src="img/company_logo.png" alt="AVATAR">
+					</span>
+
+					<div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter Email">
+						<input class="input100" type="text" name="useremail" id="useremail">
+						<span class="focus-input100" data-placeholder="UserEmail"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
+						<input class="input100" type="password" name="pass" id="userpass">
+						<span class="focus-input100" data-placeholder="Password"></span>
+					</div>
+
+					<div class="container-login100-form-btn">
+					<input type="button" class="login100-form-btn" id="custom_login" value="Login"></input>
+					</div>
+
+					<ul class="login-more p-t-190">
+						<li class="m-b-8">
+							<span class="txt1">
+								Forgot
+							</span>
+
+							<a href="#" class="txt2">
+								Username / Password?
+							</a>
+						</li>
+
+						<li>
+							<span class="txt1">
+								Don’t have an account?
+							</span>
+
+							<span class="txt1"> 
+								Please contact with Admin
+							</span>
+						</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+  <script src="js/login.js"></script>
+  
+  <!--===============================================================================================-->
+
+  <!--===============================================================================================-->
+
+	<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+	<script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDwBqldgBGWBFjLZ_w1tHuA-rt2kWZ9dI8",
+    authDomain: "charge-54eb5.firebaseapp.com",
+    databaseURL: "https://charge-54eb5.firebaseio.com",
+    projectId: "charge-54eb5",
+    storageBucket: "charge-54eb5.appspot.com",
+    messagingSenderId: "786330637245",
+    appId: "1:786330637245:web:fc9159802128eed98f78d4",
+    measurementId: "G-BBXX66X9X8"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+<script src="/__/firebase/6.5.0/firebase-app.js"></script>	
+<script src="/__/firebase/6.6.2/firebase-auth.js"></script>
+<script src="/__/firebase/init.js"></script>
+
+</body>
+</html>
