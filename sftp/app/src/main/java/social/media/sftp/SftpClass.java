@@ -1,5 +1,7 @@
 package social.media.sftp;
 
+import android.util.Log;
+
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
@@ -18,35 +20,44 @@ public class SftpClass {
     public static void uploadFile(File file) {
 
 
-        String host = "", username = "", password = "";
+        final String host = "10.3.1.144", username = "dev", password = "password123!";
 
 
-        String localFilePath = file.getAbsolutePath();
+        final String localFilePath = file.getAbsolutePath();
 
         String fileName = localFilePath.substring(localFilePath.lastIndexOf("/") + 1);
 
-        String remoteFilePath = "/home/dev/upload_with_sftp" + fileName;
+        final String remoteFilePath = "/home/dev/sftp_test" + fileName;
 
 
-        JSch jsch = new JSch();
-        Session session = null;
-        try {
-            session = jsch.getSession(username, host, 22);
-            session.setConfig("StrictHostKeyChecking", "no");
-            session.setPassword(password);
-            session.connect();
+        final JSch jsch = new JSch();
+        Thread thread =  new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Session session = null;
+                    session = jsch.getSession(username, host, 22);
+                    session.setConfig("StrictHostKeyChecking", "no");
+                    session.setPassword(password);
+                    session.connect();
 
-            Channel channel = session.openChannel("sftp");
-            channel.connect();
-            ChannelSftp sftpChannel = (ChannelSftp) channel;
-            sftpChannel.put(localFilePath, remoteFilePath);
-            sftpChannel.exit();
-            session.disconnect();
-        } catch (JSchException e) {
-            e.printStackTrace();
-        } catch (SftpException e) {
-            e.printStackTrace();
+                    Channel channel = session.openChannel("sftp");
+                    channel.connect();
+                    ChannelSftp sftpChannel = (ChannelSftp) channel;
+                    sftpChannel.put(localFilePath, remoteFilePath);
+                    sftpChannel.exit();
+                    session.disconnect();
+                } catch (JSchException e) {
+                    e.printStackTrace();
+                    Log.e("error_1", e.toString());
+                } catch (SftpException e) {
+                    e.printStackTrace();
+                    Log.e("error_2",e.toString());
 
-        }
+                }
+            }
+        });
+        thread.start();
+
     }
 }
