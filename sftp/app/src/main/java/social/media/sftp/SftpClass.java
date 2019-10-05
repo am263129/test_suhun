@@ -17,15 +17,16 @@ import java.io.File;
 public class SftpClass {
 
 
-    public static void uploadFile(File file) {
+    public static void uploadFile(String path) {
 
 
         final String host = "10.3.1.144", username = "dev", password = "password123!";
 
+        File file  =  new File(path);
+        Log.e("Test",file.getName());
+        String fileName = path.substring(path.lastIndexOf("/") + 1);
+        final String localFilePath = path+"/"+fileName;
 
-        final String localFilePath = file.getAbsolutePath();
-
-        String fileName = localFilePath.substring(localFilePath.lastIndexOf("/") + 1);
 
         final String remoteFilePath = "/home/dev/sftp_test" + fileName;
 

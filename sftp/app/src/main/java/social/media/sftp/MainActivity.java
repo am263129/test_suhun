@@ -2,23 +2,38 @@ package social.media.sftp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentResolver;
+import android.content.ContentUris;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class MainActivity extends AppCompatActivity {
     public static final int PICK_IMAGE = 1;
 
     public File upload_file;
+    public static MainActivity myself;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button button  = (Button)findViewById(R.id.button);
+        myself = this;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,11 +53,47 @@ public class MainActivity extends AppCompatActivity {
 
             try {
                 upload_file = new File(data.getData().getPath());
-                SftpClass.uploadFile(upload_file);
+
+                String id = DocumentsContract.getDocumentId(data.getData());
+                InputStream inputStream = getContentResolver().openInputStream(data.getData());
+
+                File file = new File(getCacheDir().getAbsolutePath()+"/"+id);
+                writeFile(inputStream, file);
+                String filePath = file.getAbsolutePath();
+                SftpClass.uploadFile(filePath);
             } catch (Exception e) {
                 e.printStackTrace();
+                Log.e("Eooro", e.toString());
             }
 
         }
     }
+    public static Context getInstance(){
+        return myself;
+    }
+
+    void writeFile(InputStream in, File file) {
+        OutputStream out = null;
+        try {
+            out = new FileOutputStream(file);
+            byte[] buf = new byte[1024];
+            int len;
+            while((len=in.read(buf))>0){
+                out.write(buf,0,len);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if ( out != null ) {
+                    out.close();
+                }
+                in.close();
+            } catch ( IOException e ) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
