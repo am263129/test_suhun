@@ -74,9 +74,10 @@ public class MainActivity extends AppCompatActivity {
             try {
                 upload_file = new File(data.getData().getPath());
 
-                String path = getUriRealPath(MainActivity.getInstance(),data.getData());
+//                String path = getUriRealPath(MainActivity.getInstance(),data.getData());
 
-                SftpClass.uploadFile(path);
+//                SftpClass.uploadFile(data.getData().getPath());
+                FTPClass.upload(data.getData().getPath());
             } catch (Exception e) {
                 e.printStackTrace();
                 Log.e("Eooro", e.toString());

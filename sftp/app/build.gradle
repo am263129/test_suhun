@@ -32,4 +32,9 @@ dependencies {
     implementation 'com.android.support:design:26.0.0'
     implementation 'com.android.support:recyclerview-v7:26.0.0'
     implementation 'yogesh.firzen:MukkiyaSevaigal:1.0.6'
+    implementation 'org.mockftpserver:MockFtpServer:2.7.1'
+    implementation files('libs\\commons-net-3.5-sources.jar')
+    implementation files('libs\\commons-net-3.5.jar')
+    implementation files('libs\\commons-net-examples-3.5.jar')
+
 }
